@@ -6,7 +6,7 @@ void updatePlayer() {
 
 
 
-	/*歩行フラグ、向き情報*/
+	//歩行フラグ、向き情報
 	if (player.data.x % MAP_SIZE == 0 && player.data.y % MAP_SIZE == 0 && gameState == noState && player.data.attack_flag == 0) {//マスにピッタリ　＆　攻撃状態でないなら
 		player.data.walking_flag = 1;//一先ず歩行フラグON
 		player.data.nextWalking_flag = 1;
@@ -18,6 +18,13 @@ void updatePlayer() {
 		//if (playerIsAbleToGo(player.data.x, player.data.y, player.data.muki) != 1)player.data.walking_flag = 0;//移動できないなら移動フラグを0にする
 		//decideActionPos();
 	}
+
+	//実際にプレイヤーが移動する
+	if (player.data.walking_flag == 1 && player.data.attack_flag == 0) {//歩行フラグがONかつ攻撃フラグがＯＦＦなら
+		walkingUpdatePlayer(player.data.muki);//移動変化関数（向きに応じて座標を変化させる関数）
+	}
+	
+
 }
 
 
@@ -51,6 +58,24 @@ void searchObject(){//プレイヤーと同じマスに何かオブジェクトはあるか
 	}
 
 }
+
+
+int searchObjectMyChara() {//プレイヤーと同じマスに何かオブジェクトはあるか
+	int i = 0;
+	while (i < MYCHARA_NUM) {
+		if (player.data.x == myChara[i].data.x  &&   player.data.y == myChara[i].data.y) {
+			//プレイヤーと自分のキャラが同じ座標だったら
+			player.collisonFlag = TRUE;
+			return i;//接触を確認したらこの関数から抜ける
+		}
+		else {
+			player.collisonFlag = FALSE;
+		}
+		i++;
+	}
+	return -1;//味方のオブジェクトが見つからなかった場合
+}
+
 void decideActionPos() {//actionPosを取得する関数。actionPos....プレイヤーの前の座標
 
 	if (player.data.muki == 0) { player.data.actionPosX = player.data.x; player.data.actionPosY = player.data.y + MAP_SIZE; }//下
@@ -73,7 +98,17 @@ void keyPushManage() {
 		player.data.walking_flag = 0;
 	}
 	*/
+	
+	if (player.collisonFlag && beforeZKey ==1 && keyBuffer[KEY_INPUT_Z] == 0) {
+		int collisonObjectkind = searchObjectMyChara();
+		if (collisonObjectkind != -1) {
+			player.mycharaFocusFlag = TRUE;
+			int Handle;
+			Handle = LoadSoundMem("雄叫び (2).wav");
+			PlaySoundMem(Handle, DX_PLAYTYPE_BACK); // 効果音を再生する
 
+		}
+	}
 
 
 	//移動の管理

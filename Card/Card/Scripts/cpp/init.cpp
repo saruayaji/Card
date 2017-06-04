@@ -58,8 +58,8 @@ void initOrigin() {
 
 
     player.deadOrAlive = ALIVE;
-
-
+	player.collisonFlag = FALSE;
+	player.mycharaFocusFlag = FALSE;
 
 }
 

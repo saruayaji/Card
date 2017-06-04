@@ -160,6 +160,7 @@ struct Origin {//すべての元
 	Select select;
 	int deadOrAlive;
 	boolean collisonFlag;
+	boolean mycharaFocusFlag;
 };
 
 struct Effect {
@@ -200,6 +201,16 @@ int WGenemyGraph[16];
 
 //------------------入力・色など---------------------------------------------
 char beforeSpaceKey;				//前のタイミングのSPACEキーの状態を格納
+char beforeZKey;				//前のタイミングのSPACEキーの状態を格納
+char beforeXKey;				//前のタイミングのSPACEキーの状態を格納
+char beforeCKey;				//前のタイミングのSPACEキーの状態を格納
+char beforeVKey;				//前のタイミングのSPACEキーの状態を格納
+char beforeAKey;				//前のタイミングのSPACEキーの状態を格納
+char beforeSKey;				//前のタイミングのSPACEキーの状態を格納
+char beforeDKey;				//前のタイミングのSPACEキーの状態を格納
+char beforeFKey;				//前のタイミングのSPACEキーの状態を格納
+char beforeEnterKey;				//前のタイミングのSPACEキーの状態を格納
+
 char beforeUpKey;				//前のタイミングのSPACEキーの状態を格納
 char beforeDownKey;				//前のタイミングのSPACEキーの状態を格納
 char beforeRightKey;				//前のタイミングのSPACEキーの状態を格納
@@ -260,7 +271,8 @@ extern void input();					//入力処理
 extern void updateTitle();				//タイトル画面の更新処理
 extern void update();					//更新処理↓
 extern void updatePlayer();			//プレイヤー更新処理
-extern void searchObject();
+extern void searchObject();			//プレイヤーと接触しているオブジェクト（味方・敵・中立すべて）があるかどうかを取得
+extern int searchObjectMyChara();	//プレイヤーと接触しているオブジェクト（味方）があるか、またはあったらそのindexを返す
 extern void decideActionPos();		//actionPosの更新処理
 extern void keyPushManage();		//入力可能時になんのキーを押したか判定をひとまとめに
 extern void getPlayerActState();
@@ -323,6 +335,16 @@ extern Charactor collisonObject;
 
 //------------------入力・色など---------------------------------------------
 					extern char beforeSpaceKey;				//前のタイミングのSPACEキーの状態を格納
+					extern char beforeZKey;				//前のタイミングのSPACEキーの状態を格納
+					extern char beforeXKey;				//前のタイミングのSPACEキーの状態を格納
+					extern char beforeCKey;				//前のタイミングのSPACEキーの状態を格納
+					extern char beforeVKey;				//前のタイミングのSPACEキーの状態を格納
+					extern char beforeAKey;				//前のタイミングのSPACEキーの状態を格納
+					extern char beforeSKey;				//前のタイミングのSPACEキーの状態を格納
+					extern char beforeDKey;				//前のタイミングのSPACEキーの状態を格納
+					extern char beforeFKey;				//前のタイミングのSPACEキーの状態を格納
+					extern char beforeEnterKey;				//前のタイミングのSPACEキーの状態を格納
+
 					extern char beforeUpKey;				//前のタイミングのSPACEキーの状態を格納
 					extern char beforeDownKey;				//前のタイミングのSPACEキーの状態を格納
 					extern char beforeRightKey;				//前のタイミングのSPACEキーの状態を格納
@@ -381,7 +403,8 @@ extern Charactor collisonObject;
 					extern void update();					//更新処理↓
 					extern void updatePlayer();			//プレイヤー更新処理
 					extern void decideActionPos();		//actionPosの更新処理
-					extern void searchObject();
+					extern void searchObject();			//プレイヤーと接触しているオブジェクト（味方・敵・中立すべて）があるかどうかを取得
+					extern int searchObjectMyChara();	//プレイヤーと接触しているオブジェクト（味方）があるか、またはあったらそのindexを返す
 					extern void keyPushManage();		//入力可能時になんのキーを押したか判定をひとまとめに
 					extern void getPlayerActState();
 					extern void walkingUpdatePlayer(int);//移動の更新処理

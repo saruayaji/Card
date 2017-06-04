@@ -5,7 +5,10 @@ void updateTitle() {
 	if (titleState == titleSelect) {
 		// spaceキーを押してから離すと反応
 		if (beforeSpaceKey == 1 && keyBuffer[KEY_INPUT_SPACE] == 0) {//スペースを押したら
-			mainState = GAME;
+			if(player.select.titleMenuPointY == 300 || player.select.titleMenuPointY == 325)
+					mainState = GAME;
+			else 	DxLib_End();//終わるを押したら DXライブラリ使用の終了処理
+			
 		}
 
 
