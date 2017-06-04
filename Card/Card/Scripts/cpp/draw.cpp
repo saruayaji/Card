@@ -30,8 +30,10 @@ void draw() {
 
 		drawHeightMap();//MAP最上位レイヤーを付け足して描画
 		//drawConsole();//ゲームHPバーや、デバックコンソールの描画
-		//if (gameState == openGameMenu)drawGameMenu();
 		objectCollisonDraw();
+		if (gameState == openGameMenu)drawGameMenu();
+		if (gameState == openMyCharaMenu)drawMyCharaMenu();
+
 		break;
 
 	case GAMEOVER:

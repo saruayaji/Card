@@ -16,15 +16,25 @@ void  updateGameMenu() {
 
 	if (gameState == openGameMenu) {
 
-		if ((keyBuffer[KEY_INPUT_DOWN] == 0 && beforeDownKey == 1) ||
-			(keyBuffer[KEY_INPUT_UP] == 0 && beforeUpKey == 1)) {
+		if (keyBuffer[KEY_INPUT_DOWN] == 0 && beforeDownKey == 1){
 			PlaySound("決定3.wav", DX_PLAYTYPE_BACK); //test.wavのバックグラウンド演奏
-			if (player.select.openGameMenuPointY == 45) {
-				player.select.openGameMenuPointY = 70;
-			}
-			else {
+			if (player.select.openGameMenuPointY == 95) {
 				player.select.openGameMenuPointY = 45;
 			}
+			else {
+				player.select.openGameMenuPointY += 25;
+			}
+		}
+		
+		if(keyBuffer[KEY_INPUT_UP] == 0 && beforeUpKey == 1){
+			PlaySound("決定3.wav", DX_PLAYTYPE_BACK); //test.wavのバックグラウンド演奏
+			if (player.select.openGameMenuPointY == 45) {
+				player.select.openGameMenuPointY = 95;
+			}
+			else {
+				player.select.openGameMenuPointY -= 25;
+			}
+
 		}
 
 		if ((keyBuffer[KEY_INPUT_RIGHT] == 0 && beforeRightKey == 1) ||

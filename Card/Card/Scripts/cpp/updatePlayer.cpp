@@ -13,10 +13,13 @@ void updatePlayer() {
 		keyPushManage();//なんのキーを押されたか管理
 		player.collisonFlag = FALSE;
 		searchObject();
-		
+
 		//移動できるかを判定。
 		//if (playerIsAbleToGo(player.data.x, player.data.y, player.data.muki) != 1)player.data.walking_flag = 0;//移動できないなら移動フラグを0にする
 		//decideActionPos();
+	
+
+	
 	}
 
 	//実際にプレイヤーが移動する
@@ -99,17 +102,9 @@ void keyPushManage() {
 	}
 	*/
 	
-	if (player.collisonFlag && beforeZKey ==1 && keyBuffer[KEY_INPUT_Z] == 0) {
-		int collisonObjectkind = searchObjectMyChara();
-		if (collisonObjectkind != -1) {
-			player.mycharaFocusFlag = TRUE;
-			int Handle;
-			Handle = LoadSoundMem("雄叫び (2).wav");
-			PlaySoundMem(Handle, DX_PLAYTYPE_BACK); // 効果音を再生する
 
-		}
-	}
 
+	
 
 	//移動の管理
 	//十字移動　　　「↓」「←」「→」「↑」の順

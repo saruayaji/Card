@@ -56,6 +56,7 @@
 //------gameState------------------
 #define openGameMenu 7
 #define openItemMenu 8
+#define openMyCharaMenu 9
 
 
 
@@ -104,6 +105,9 @@ struct Select {
 	int titleMenuPointY;
 	int openGameMenuPointX;
 	int openGameMenuPointY;
+	int openMyCharaMenuPointX;
+	int openMyCharaMenuPointY;
+
 };
 struct Message {
 	char mes[20];
@@ -263,7 +267,7 @@ extern void initEnemy();				//敵の初期化
 extern void initMAP();					//マップの初期化
 extern void initTitleMenu();			//タイトルメニューのselectの初期化
 extern void initOpenGameMenu();		//ゲームメニューのselectの初期化
-
+extern void initMyCharaMenu();		//キャラメニューのselectの初期化
 //■入力
 extern void input();					//入力処理
 
@@ -289,6 +293,7 @@ extern void attackUpdateEnemy(int, int, int, int);//攻撃の更新処理
 extern int EnemyIsAbleToGo(int, int, int, int);				//入力先に移動できるか
 extern void updateTurn();
 extern void updateGameMenu();			//ゲームメニュー画面の更新
+extern void updateMyCharaMenu();		//キャラメニュー画面の更新
 								//void updateMAP();				//ＭＡＰ更新処理
 
 //■描画
@@ -303,6 +308,7 @@ extern void drawMAP(MAP);					//ＭＡＰ描写
 extern void objectCollisonDraw();//オリジンとオブジェクトが接触した際に描画される
 extern void drawHeightMap();			//ＭＡＰの高レイヤーのグラフィックの描写
 extern void drawGameMenu();				//ゲーム画面のメニューを表示
+extern void drawMyCharaMenu();				//キャラのメニューを表示
 extern void drawConsole();				//ゲーム画面のＨＰバーやテストの座標表記
 extern void drawMessage(int);
 extern int mapdata00(int i, int j);
@@ -395,6 +401,7 @@ extern Charactor collisonObject;
 					extern void initMAP();					//マップの初期化
 					extern void initTitleMenu();			//タイトルメニューのselectの初期化
 					extern void initOpenGameMenu();		//ゲームメニューのselectの初期化
+					extern void initMyCharaMenu();		//キャラメニューのselectの初期化
 
 //■入力
 					extern void input();					//入力処理
@@ -420,6 +427,7 @@ extern Charactor collisonObject;
 					extern int EnemyIsAbleToGo(int, int, int, int);				//入力先に移動できるか
 					extern void updateTurn();
 					extern void updateGameMenu();			//ゲームメニュー画面の更新
+					extern void updateMyCharaMenu();		//キャラメニュー画面の更新
 															//void updateMAP();				//ＭＡＰ更新処理
 
 //■描画
@@ -434,6 +442,8 @@ extern Charactor collisonObject;
 					extern void objectCollisonDraw();//オリジンとオブジェクトが接触した際に描画される
 					extern void drawHeightMap();			//ＭＡＰの高レイヤーのグラフィックの描写
 					extern void drawGameMenu();				//ゲーム画面のメニューを表示
+					extern void drawMyCharaMenu();				//キャラのメニューを表示
+
 					extern void drawConsole();				//ゲーム画面のＨＰバーやテストの座標表記
 					extern void drawMessage(int);
 					extern int mapdata00(int i, int j);

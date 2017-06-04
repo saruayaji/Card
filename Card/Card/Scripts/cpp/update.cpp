@@ -14,8 +14,8 @@ void update() {
 	case GAME:
 		// ゲームの更新処理を行う
 		updatePlayer();	//プレイヤー更新処理
-		//①移動する
-	
+		updateGameMenu();//メニュー更新処理
+		updateMyCharaMenu();//キャラメニュー更新処理
 
 		break;
 

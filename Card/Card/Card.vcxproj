@@ -20,13 +20,17 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Scripts\cpp\draw.cpp" />
+    <ClCompile Include="Scripts\cpp\drawConsole.cpp" />
+    <ClCompile Include="Scripts\cpp\drawGameMenu.cpp" />
     <ClCompile Include="Scripts\cpp\drawMAP.cpp" />
+    <ClCompile Include="Scripts\cpp\drawMyCharaMenu.cpp" />
     <ClCompile Include="Scripts\cpp\init.cpp" />
     <ClCompile Include="Scripts\cpp\input.cpp" />
     <ClCompile Include="Scripts\cpp\main.cpp" />
     <ClCompile Include="Scripts\cpp\mapdata.cpp" />
     <ClCompile Include="Scripts\cpp\update.cpp" />
     <ClCompile Include="Scripts\cpp\updateGameMenu.cpp" />
+    <ClCompile Include="Scripts\cpp\updateMyCharaMenu.cpp" />
     <ClCompile Include="Scripts\cpp\updatePlayer.cpp" />
     <ClCompile Include="Scripts\cpp\updateTitle.cpp" />
     <ClCompile Include="Scripts\cpp\walkingUpdateEnemy.cpp" />

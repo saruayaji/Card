@@ -12,7 +12,8 @@ void init() {
     initEnemy();
     initTitleMenu();
     initOpenGameMenu();
-    initTitleMenu();
+	initMyCharaMenu();
+	initTitleMenu();
     mainState = TITLE;
     titleState = titleSelect;
     gameState = noState;
@@ -273,6 +274,12 @@ void initTitleMenu() {
 void initOpenGameMenu() {
     player.select.openGameMenuPointX = 13;//ゲームメニューのslectの初期座標
     player.select.openGameMenuPointY = 45;
+
+}
+
+void initMyCharaMenu() {
+	player.select.openMyCharaMenuPointX = 500;//ゲームメニューのslectの初期座標
+	player.select.openMyCharaMenuPointY = 50;
 
 }
 
