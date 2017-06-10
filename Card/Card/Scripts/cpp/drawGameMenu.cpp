@@ -20,8 +20,10 @@ void drawGameMenu() {
 	//select文字列			
 	DrawString(player.select.openGameMenuPointX, player.select.openGameMenuPointY, "■", Cr[0] = (0, 0, 0));
 	DrawString(30, 45, "持ち物", Cr[0] = (0, 0, 0));
-	DrawString(30, 70, "状態", Cr[0] = (0, 0, 0));
+	DrawString(30, 70, "自軍戦力詳細", Cr[0] = (0, 0, 0));
 	DrawString(130, 45, "設定", Cr[0] = (0, 0, 0));
+	DrawString(130, 70, "ギブアップ", Cr[0] = (0, 0, 0));
+
 
 }
 

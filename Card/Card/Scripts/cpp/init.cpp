@@ -60,7 +60,8 @@ void initOrigin() {
 
     player.deadOrAlive = ALIVE;
 	player.collisonFlag = FALSE;
-	player.mycharaFocusFlag = FALSE;
+	player.mycharaFocus.mycharaFocusflag = FALSE;
+	player.mycharaFocus.state = noState;
 
 }
 
@@ -280,6 +281,6 @@ void initOpenGameMenu() {
 void initMyCharaMenu() {
 	player.select.openMyCharaMenuPointX = 500;//ゲームメニューのslectの初期座標
 	player.select.openMyCharaMenuPointY = 50;
-
+	player.mycharaFocus.selectIndex = 0;
 }
 

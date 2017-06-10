@@ -22,11 +22,11 @@ void drawMyCharaMenu() {
 	DrawString(520, 50, "移動", Cr[0] = (0, 0, 0));
 	DrawString(520, 70, "スキル", Cr[0] = (0, 0, 0));
 	DrawString(520, 90, "ステート", Cr[0] = (0, 0, 0));
-	DrawString(520, 110, "あ", Cr[0] = (0, 0, 0));
-	DrawString(520, 130, "い", Cr[0] = (0, 0, 0));
-	DrawString(520, 150, "う", Cr[0] = (0, 0, 0));
-	DrawString(520, 170, "え", Cr[0] = (0, 0, 0));
-	DrawString(520, 190, "お", Cr[0] = (0, 0, 0));
+	DrawString(520, 110, "マップ攻撃", Cr[0] = (0, 0, 0));
+	DrawString(520, 130, "アイテム", Cr[0] = (0, 0, 0));
+	DrawString(520, 150, "装備", Cr[0] = (0, 0, 0));
+	DrawString(520, 170, "？", Cr[0] = (0, 0, 0));
+	DrawString(520, 190, "警戒", Cr[0] = (0, 0, 0));
 
 
 }

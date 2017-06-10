@@ -5,7 +5,7 @@ void  updateGameMenu() {
 	//Ｘキーが押されたらメニュー開く
 	if (player.data.walking_flag == 0 && keyBuffer[KEY_INPUT_X] == 1 && gameState == noState) {//Xが押されているなら
 		gameState = openGameMenu;
-		PlaySound("ブザー2.wav", DX_PLAYTYPE_BACK); //test.wavのバックグラウンド演奏
+		PlaySound("決定3.wav", DX_PLAYTYPE_BACK); //test.wavのバックグラウンド演奏
 
 	}
 	//Ｃを押したら戻る

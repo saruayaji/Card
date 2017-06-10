@@ -58,6 +58,17 @@
 #define openItemMenu 8
 #define openMyCharaMenu 9
 
+//------mycharaFocusState-------------
+#define SELECT 1
+#define MOVE 2
+#define SKILL 3
+#define STATE 4
+#define MAPATK 5
+#define ITEM 6
+#define EQU 7
+#define WARMING 9
+
+
 
 
 #define WD 150//HPƒo[‚Ì•
@@ -116,6 +127,12 @@ struct Message {
 
 };
 
+struct MycharaFocus {
+	boolean mycharaFocusflag;
+	int state;
+	int selectIndex;
+};
+
 
 
 struct Status {
@@ -164,7 +181,7 @@ struct Origin {//‚·‚×‚Ä‚ÌŒ³
 	Select select;
 	int deadOrAlive;
 	boolean collisonFlag;
-	boolean mycharaFocusFlag;
+	MycharaFocus mycharaFocus;
 };
 
 struct Effect {
