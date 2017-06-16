@@ -11,6 +11,7 @@ void  updateGameMenu() {
 	//Ｃを押したら戻る
 	if (gameState == openGameMenu && keyBuffer[KEY_INPUT_C] == 1) {
 		gameState = noState;
+		PlaySound("ブザー1.wav", DX_PLAYTYPE_BACK); //test.wavのバックグラウンド演奏
 		initOpenGameMenu();//メニューセレクトポイントの座標初期化
 	}
 
@@ -41,7 +42,7 @@ void  updateGameMenu() {
 			(keyBuffer[KEY_INPUT_LEFT] == 0 && beforeLeftKey == 1)) {
 			PlaySound("決定3.wav", DX_PLAYTYPE_BACK); //test.wavのバックグラウンド演奏
 			if (player.select.openGameMenuPointX == 13) {
-				player.select.openGameMenuPointX = 113;
+				player.select.openGameMenuPointX = 133;
 			}
 			else {
 				player.select.openGameMenuPointX = 13;

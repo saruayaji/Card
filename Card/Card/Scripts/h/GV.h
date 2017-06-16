@@ -3,8 +3,6 @@
 #pragma once
 
 #include "DxLib.h"
-
-
 #include <string>
 #include <iostream>
 
@@ -87,6 +85,9 @@ struct Data {
 	int y;
 	int nextPosX;
 	int nextPosY;
+	int initPosX;
+	int initPosY;
+	int initmuki;
 	int muki;
 	int actionPosX;			//プレイヤーの向きに１マス進んだマスのX座標(エンターや攻撃で目の前のオブジェクトにアクションを起こすときに使用)
 	int actionPosY;			//プレイヤーの向きに１マス進んだマスのY座標(エンターや攻撃で目の前のオブジェクトにアクションを起こすときに使用)
@@ -136,10 +137,10 @@ struct MycharaFocus {
 
 
 struct Status {
-	int plug;
-	int rearity;
-	int MS;		//moving speed
-	int nowMS;
+	int plug;//召喚必要プラグ
+	int rearity;//レア度
+	int MS;		//MAX移動マス
+	int nowMS;	//あと何歩移動できるか
 	int canItem;
 	int nowCanItem;
 	int HP;
@@ -173,13 +174,14 @@ struct Charactor {
 	Data data;
 	Status status;
 	State state;
-
+	boolean myCharaCollisonFlag;
 };
 
 struct Origin {//すべての元
 	Data data;
 	Select select;
 	int deadOrAlive;
+	int collisonObjectkind;
 	boolean collisonFlag;
 	MycharaFocus mycharaFocus;
 };
@@ -299,7 +301,11 @@ extern void keyPushManage();		//入力可能時になんのキーを押したか判定をひとまとめ
 extern void getPlayerActState();
 extern void walkingUpdatePlayer(int);//移動の更新処理
 extern void attackUpdatePlayer(int, int, int);//攻撃の更新処理
-extern int playerIsAbleToGo(int, int, int);				//入力先に移動できるか
+extern int isAbleToGo(int, int, int, int);				//入力先に移動できるか
+extern void updateMyChara();		//マイキャラの更新
+extern void myCharaKeyPushManage();//マイキャラのキー管理
+extern void walkingUpdateMyChara(int);//マイキャラの歩行処理
+extern int myCharaSearchObjectMyChara();
 
 extern void updateEnemy();		//敵更新処理
 extern void decideAction();
@@ -433,7 +439,13 @@ extern Charactor collisonObject;
 					extern void getPlayerActState();
 					extern void walkingUpdatePlayer(int);//移動の更新処理
 					extern void attackUpdatePlayer(int, int, int);//攻撃の更新処理
-					extern int playerIsAbleToGo(int, int, int);				//入力先に移動できるか
+					extern int isAbleToGo(int, int, int, int);				//入力先に移動できるか
+					extern void updateMyChara();		//マイキャラの更新
+					extern void myCharaKeyPushManage();//マイキャラのキー管理
+					extern void walkingUpdateMyChara(int);//マイキャラの歩行処理
+					extern int myCharaSearchObjectMyChara();
+
+
 
 					extern void updateEnemy();		//敵更新処理
 					extern void decideAction();

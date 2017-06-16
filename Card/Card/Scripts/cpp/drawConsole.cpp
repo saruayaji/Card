@@ -2,7 +2,7 @@
 
 
 void drawConsole() {
-
+	/*
 	//矢印の表示
 	if (keyBuffer[KEY_INPUT_C] == 1) {
 		if (player.data.muki == 0)arrow.x = startXpos, arrow.y = startYpos + MAP_SIZE;
@@ -17,10 +17,10 @@ void drawConsole() {
 		DrawGraph(arrow.x, arrow.y, arrowGraph[player.data.muki], TRUE);//矢印の描画
 	}
 
-
+	*/
 
 	//コンソール
-	DrawFormatString(200, 350, Cr[1] = GetColor(255, 0, 0), "コリジョン%d gamestate%d ", player.collisonFlag, gameState);
+	DrawFormatString(200, 0, Cr[1] = GetColor(255, 0, 0), "%d         gamestate %d", myCharaSearchObjectMyChara(), gameState);
 
 
 /*

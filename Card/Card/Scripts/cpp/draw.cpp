@@ -29,7 +29,7 @@ void draw() {
 		drawPlayer();										//ƒvƒŒƒCƒ„[‚ğ•`‰æ‚·‚é
 
 		drawHeightMap();//MAPÅãˆÊƒŒƒCƒ„[‚ğ•t‚¯‘«‚µ‚Ä•`‰æ
-		//drawConsole();//ƒQ[ƒ€HPƒo[‚âAƒfƒoƒbƒNƒRƒ“ƒ\[ƒ‹‚Ì•`‰æ
+		drawConsole();//ƒQ[ƒ€HPƒo[‚âAƒfƒoƒbƒNƒRƒ“ƒ\[ƒ‹‚Ì•`‰æ
 		objectCollisonDraw();
 		if (gameState == openGameMenu)drawGameMenu();
 		if (gameState == openMyCharaMenu)drawMyCharaMenu();
@@ -92,22 +92,26 @@ void drawPlayer() {
 // ©ƒLƒƒƒ‰‚Ì•\¦
 void drawMyChara() {
 	int i = 0;
+
 	while (i < MYCHARA_NUM) {
 		switch (myChara[i].state.deadOrAlive) {
 		case ALIVE:
+			int myCharaXpos = myChara[i].data.x - player.data.x, myCharaYpos = myChara[i].data.y - player.data.y;			//ƒvƒŒƒCƒ„[‚ÌÀ•W‚ÆƒLƒƒƒ‰‚ÌÀ•W‚Ì·
 
-			int myCharaXpos = myChara[i].data.x - player.data.x, myCharaYpos = myChara[i].data.y - player.data.y;			//ålŒö‚ÌÀ•W‚Æƒ‚ƒ“ƒXƒ^[‚ÌÀ•W‚Ì·
-
-			if (myChara[i].data.muki == 4 || myChara[i].data.muki == 5)myChara[i].data.img = myChara[i].data.WG[myChara[i].data.x % MAP_SIZE / 8 + 2 * 4];//ålŒö‚ªÎ‚ßˆÚ“®i‰EãA‰E‰ºj‚Ì‚Æ‚«‚Ì‰æ‘œƒZƒbƒg
-			else if (myChara[i].data.muki == 6 || myChara[i].data.muki == 7)myChara[i].data.img = myChara[i].data.WG[myChara[i].data.x % MAP_SIZE / 8 + 1 * 4];//ålŒö‚ªÎ‚ßˆÚ“®i¶ãA¶‰ºj‚Ì‚Æ‚«‚Ì‰æ‘œƒZƒbƒg
-			else myChara[i].data.img = myChara[i].data.WG[(myChara[i].data.x % MAP_SIZE + myChara[i].data.y % MAP_SIZE) / 8 + myChara[i].data.muki * 4];//ålŒö‚ÌŒü‚«‚ğl—¶‚µ‚½\šˆÚ“®‚ÌålŒö‚Ì‰æ‘œ‚ÌƒZƒbƒgB
-
+			if (myChara[i].data.muki == 4 || myChara[i].data.muki == 5)myChara[i].data.img = myChara[i].data.WG[myChara[i].data.x % MAP_SIZE / 8 + 2 * 4];//ƒ}ƒCƒLƒƒƒ‰‚ªÎ‚ßˆÚ“®i‰EãA‰E‰ºj‚Ì‚Æ‚«‚Ì‰æ‘œƒZƒbƒg
+			else if (myChara[i].data.muki == 6 || myChara[i].data.muki == 7)myChara[i].data.img = myChara[i].data.WG[myChara[i].data.x % MAP_SIZE / 8 + 1 * 4];//ƒ}ƒCƒLƒƒƒ‰‚ªÎ‚ßˆÚ“®i¶ãA¶‰ºj‚Ì‚Æ‚«‚Ì‰æ‘œƒZƒbƒg
+			else myChara[i].data.img = myChara[i].data.WG[(myChara[i].data.x % MAP_SIZE + myChara[i].data.y % MAP_SIZE) / 8 + myChara[i].data.muki * 4];//ƒ}ƒCƒLƒƒƒ‰‚ÌŒü‚«‚ğl—¶‚µ‚½\šˆÚ“®‚ÌålŒö‚Ì‰æ‘œ‚ÌƒZƒbƒgB
+			SetDrawBlendMode(DX_BLENDMODE_ALPHA, 80);//Œ‹\“§–¾
+			DrawBox(startXpos + myCharaXpos, startYpos + myCharaYpos, startXpos + myCharaXpos + MAP_SIZE, startYpos + myCharaYpos + MAP_SIZE, Cr[0] = GetColor(0, 80, 150), TRUE);
+			SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);///////////////////////////////“§–¾“x‚O
 			DrawGraph(startXpos + myCharaXpos, startYpos + myCharaYpos - 18, myChara[i].data.img, TRUE);//ålŒö‚Ì•`‰æ
 																		//case DEAD:
 		
 			i++;
 		}
 	}
+
+
 	if (myChara[i].data.attack_flag == 1) {//UŒ‚ó‘Ô‚È‚ç
 		if (normalAttack.time == 1)
 			PlaySound("—Y‹©‚Ñ (2).wav", DX_PLAYTYPE_BACK); //test.wav‚ÌƒoƒbƒNƒOƒ‰ƒEƒ“ƒh‰‰‘t
@@ -120,12 +124,14 @@ void drawEnemy(int i) {
 
 		switch (enemyChara[i].state.deadOrAlive) {
 		case ALIVE:
-			int enemyXpos = enemyChara[i].data.x - player.data.x, enemyYpos = enemyChara[i].data.y - player.data.y;			//ålŒö‚ÌÀ•W‚Æƒ‚ƒ“ƒXƒ^[‚ÌÀ•W‚Ì·
+			int enemyXpos = enemyChara[i].data.x - player.data.x, enemyYpos = enemyChara[i].data.y - player.data.y;			//ƒvƒŒƒCƒ„[‚ÌÀ•W‚Æƒ‚ƒ“ƒXƒ^[‚ÌÀ•W‚Ì·
 
 			if      (enemyChara[i].data.muki == 4 || enemyChara[i].data.muki == 5)enemyChara[i].data.img = enemyChara[i].data.WG[enemyChara[i].data.x % MAP_SIZE / 8 + 2 * 4];//ålŒö‚ÌŒü‚«‚ğl—¶‚µ‚½ålŒö‚Ì‰æ‘œ‚ÌƒZƒbƒgB
 			else if (enemyChara[i].data.muki == 6 || enemyChara[i].data.muki == 7)enemyChara[i].data.img = enemyChara[i].data.WG[enemyChara[i].data.x % MAP_SIZE / 8 + 1 * 4];//ålŒö‚ÌŒü‚«‚ğl—¶‚µ‚½ålŒö‚Ì‰æ‘œ‚ÌƒZƒbƒgB
 			else     enemyChara[i].data.img = enemyChara[i].data.WG[(enemyChara[i].data.x % MAP_SIZE + enemyChara[i].data.y % MAP_SIZE) / 8 + enemyChara[i].data.muki * 4];//ƒ‚ƒ“ƒXƒ^[‚ÌŒü‚«‚ğl—¶‚µ‚½ƒ‚ƒ“ƒXƒ^[‚Ì‰æ‘œ‚ÌƒZƒbƒgB
-			
+			SetDrawBlendMode(DX_BLENDMODE_ALPHA, 80);//Œ‹\“§–¾
+			DrawBox(startXpos + enemyXpos, startYpos + enemyYpos, startXpos + enemyXpos + MAP_SIZE, startYpos + enemyYpos + MAP_SIZE, Cr[0] = GetColor(150, 10, 0), TRUE);
+			SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);//“§–¾“x‚O
 			DrawGraph(startXpos + enemyXpos, startYpos + enemyYpos - 18, enemyChara[i].data.img, TRUE);//ƒ‚ƒ“ƒXƒ^[‚Ì•`‰æ
 
 																								  //case DEAD:
@@ -139,9 +145,9 @@ void objectCollisonDraw() {//ƒvƒŒƒCƒ„[‚ªƒIƒuƒWƒFƒNƒg‚ÉÚG‚µ‚½Û‚É•\¦‚³‚ê‚éUI
 	if (player.collisonFlag == TRUE) {
 		
 		
-		SetDrawBlendMode(DX_BLENDMODE_ALPHA, 50);//////////////////////////////////‚â‚â“§–¾
+		SetDrawBlendMode(DX_BLENDMODE_ALPHA, 50);//////////////////////////////////Œ‹\“§–¾
 		DrawBox(5, 300, 635, 475, GetColor(0, 0, 255), TRUE);
-		SetDrawBlendMode(DX_BLENDMODE_ALPHA, 130);/////////////////////////////////Œ‹\“§–¾
+		SetDrawBlendMode(DX_BLENDMODE_ALPHA, 130);/////////////////////////////////‚â‚â“§–¾
 		//HPƒo[‚Ì•\¦
 		DrawBox(200, 340, 200 + WD, 350, GetColor(0, 255, 0), FALSE);//ƒ[ƒ^[‚Ì˜g‚ğ•`‰æ                                      
 		DrawBox(200, 340, 200 + WD* collisonObject.status.HP / collisonObject.status.MAXHP, 350, GetColor(0, 255, 0), TRUE);//ƒ[ƒ^[‚Ì’†g‚ğ•`‰æ
@@ -181,6 +187,9 @@ void objectCollisonDraw() {//ƒvƒŒƒCƒ„[‚ªƒIƒuƒWƒFƒNƒg‚ÉÚG‚µ‚½Û‚É•\¦‚³‚ê‚éUI
 		DrawFormatString(450, 400, Cr[1] = GetColor(255, 255, 255), "‰B‚Ø‚¢—¦  %d", collisonObject.status.hide);//ƒŒƒxƒ‹”’l
 		DrawFormatString(450, 415, Cr[1] = GetColor(255, 255, 255), "ˆÚ“®ƒ}ƒX  %d", collisonObject.status.MS);//ƒŒƒxƒ‹”’l
 		DrawFormatString(450, 460, Cr[1] = GetColor(255, 255, 255), "ƒRƒXƒg  %d", collisonObject.status.cost);//ƒŒƒxƒ‹”’l
+
+		SetFontSize(40);
+		DrawFormatString(560, 400, Cr[1] = GetColor(255, 255, 255),  "%d", collisonObject.status.nowMS);//ƒŒƒxƒ‹”’l
 
 		SetFontSize(20);
 

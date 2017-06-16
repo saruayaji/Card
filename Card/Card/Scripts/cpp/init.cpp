@@ -249,6 +249,13 @@ void initEnemy() {
 
 }
 
+//マイキャラ単体のnowMSを初期化
+void initMS(int index) {
+
+		myChara[index].status.nowMS = myChara[index].status.MS;		//今移動できるマス
+
+}
+
 //MAPの初期化
 void initMAP() {
     stage00.Switch = ON;
