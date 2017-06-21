@@ -2,6 +2,7 @@
 
 //　ゲームメニューの更新処理
 void  updateGameMenu() {
+	/*
 	//Ｘキーが押されたらメニュー開く
 	if (player.data.walking_flag == 0 && keyBuffer[KEY_INPUT_X] == 1 && gameState == noState) {//Xが押されているなら
 		gameState = openGameMenu;
@@ -20,10 +21,22 @@ void  updateGameMenu() {
 
 		initAllMyCharaNowMS();
 	}
+	*/
+	switch (player.gameMenu.state)
+	{
+	case noState:
+		if (beforeXKey == 1 && keyBuffer[KEY_INPUT_X] == 0 && player.data.walking_flag == 0) {
+			gameState = openGameMenu;//7
+			player.gameMenu.state = SELECT;
+			PlaySound("決定3.wav", DX_PLAYTYPE_BACK); //test.wavのバックグラウンド演奏	
+		}
 
-	if (gameState == openGameMenu) {
+		break;
 
-		if (keyBuffer[KEY_INPUT_DOWN] == 0 && beforeDownKey == 1){
+
+
+	case SELECT:
+		if (keyBuffer[KEY_INPUT_DOWN] == 0 && beforeDownKey == 1) {
 			PlaySound("決定3.wav", DX_PLAYTYPE_BACK); //test.wavのバックグラウンド演奏
 			if (player.select.openGameMenuPointY == 95) {
 				player.select.openGameMenuPointY = 45;
@@ -32,8 +45,8 @@ void  updateGameMenu() {
 				player.select.openGameMenuPointY += 25;
 			}
 		}
-		
-		if(keyBuffer[KEY_INPUT_UP] == 0 && beforeUpKey == 1){
+
+		if (keyBuffer[KEY_INPUT_UP] == 0 && beforeUpKey == 1) {
 			PlaySound("決定3.wav", DX_PLAYTYPE_BACK); //test.wavのバックグラウンド演奏
 			if (player.select.openGameMenuPointY == 45) {
 				player.select.openGameMenuPointY = 95;
@@ -55,7 +68,14 @@ void  updateGameMenu() {
 			}
 		}
 
-
+		//Ｃを押したら戻る
+		if (beforeCKey == 1 && keyBuffer[KEY_INPUT_C] == 0) {
+			gameState = noState;
+			player.gameMenu.state = noState;
+			PlaySound("キャンセル1.wav", DX_PLAYTYPE_BACK); //test.wavのバックグラウンド演奏
+			initOpenGameMenu();//メニューセレクトポイントの座標初期化
+		}
+		break;
 	}
 
 }
