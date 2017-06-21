@@ -69,11 +69,7 @@ void  updateMyCharaMenu() {
 					PlaySound("決定3.wav", DX_PLAYTYPE_BACK); //test.wavのバックグラウンド演奏
 					player.mycharaFocus.state = MOVE;
 					//初期座標を設定
-					myChara[player.collisonObjectkind].data.initPosX = myChara[player.collisonObjectkind].data.x;
-					myChara[player.collisonObjectkind].data.initPosY = myChara[player.collisonObjectkind].data.y;
-					myChara[player.collisonObjectkind].data.initmuki = myChara[player.collisonObjectkind].data.muki;
-					player.data.initPosX = player.data.x;
-					player.data.initPosY = player.data.y;
+					initGetMyCharaMoveData();
 
 				}
 				if (player.mycharaFocus.selectIndex == 1) {
@@ -112,16 +108,16 @@ void  updateMyCharaMenu() {
 			
 			//Ｃを押したら戻る
 			if (beforeCKey == 1 && keyBuffer[KEY_INPUT_C] == 0) {
-				//キャラ座標を初期座標に戻す（キャンセル処理）
-				myChara[player.collisonObjectkind].data.x = myChara[player.collisonObjectkind].data.initPosX;
-				myChara[player.collisonObjectkind].data.y = myChara[player.collisonObjectkind].data.initPosY;
-				myChara[player.collisonObjectkind].data.muki = myChara[player.collisonObjectkind].data.muki;
-				player.data.x = player.data.initPosX;
-				player.data.y = player.data.initPosY;
-
-				player.mycharaFocus.state = SELECT;
-				PlaySound("キャンセル1.wav", DX_PLAYTYPE_BACK); //test.wavのバックグラウンド演奏
-				initMyCharaMenu();//メニューセレクトポイントの座標初期化
+				if (myChara[player.collisonObjectkind].data.x % MAP_SIZE == 0 && myChara[player.collisonObjectkind].data.y % MAP_SIZE == 0) {
+					//キャラ座標を初期座標に戻す（キャンセル処理）
+					initSetMyCharaMoveData();
+					player.mycharaFocus.state = SELECT;
+					PlaySound("キャンセル1.wav", DX_PLAYTYPE_BACK); //test.wavのバックグラウンド演奏
+					initMyCharaMenu();//メニューセレクトポイントの座標初期化
+				}
+				else {
+					
+				}
 			}
 			break;
 		case SKILL:

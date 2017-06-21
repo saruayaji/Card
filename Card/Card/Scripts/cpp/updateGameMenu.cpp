@@ -13,6 +13,12 @@ void  updateGameMenu() {
 		gameState = noState;
 		PlaySound("ブザー1.wav", DX_PLAYTYPE_BACK); //test.wavのバックグラウンド演奏
 		initOpenGameMenu();//メニューセレクトポイントの座標初期化
+
+
+
+
+
+		initAllMyCharaNowMS();
 	}
 
 	if (gameState == openGameMenu) {

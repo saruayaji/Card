@@ -20,7 +20,8 @@ void drawConsole() {
 	*/
 
 	//ÉRÉìÉ\Å[Éã
-	DrawFormatString(200, 0, Cr[1] = GetColor(255, 0, 0), "%d         gamestate %d", myCharaSearchObjectMyChara(), gameState);
+	DrawFormatString(200, 0, Cr[1] = GetColor(255, 0, 0), "%d         gamestate %d	     %d", myCharaSearchObjectMyChara(), gameState, myChara[player.collisonObjectkind].status.nowMS);
+	DrawFormatString(200, 50, Cr[1] = GetColor(255, 0, 0), "%d, %d  next %d, %d",myChara[player.collisonObjectkind].data.x / MAP_SIZE, myChara[player.collisonObjectkind].data.y / MAP_SIZE, myChara[player.collisonObjectkind].data.nextPosX / MAP_SIZE, myChara[player.collisonObjectkind].data.nextPosY / MAP_SIZE);
 
 
 /*

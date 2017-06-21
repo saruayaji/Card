@@ -181,15 +181,15 @@ void objectCollisonDraw() {//ƒvƒŒƒCƒ„[‚ªƒIƒuƒWƒFƒNƒg‚ÉÚG‚µ‚½Û‚É•\¦‚³‚ê‚éUI
 		DrawFormatString(200, 445, Cr[1] = GetColor(255, 255, 255), "RES  %d", collisonObject.status.RES);//RES”’l
 		DrawFormatString(200, 460, Cr[1] = GetColor(255, 255, 255), "SPD  %d", collisonObject.status.SPD);//SPD”’l
 		DrawFormatString(450, 340, Cr[1] = GetColor(255, 255, 255), "ƒŒƒxƒ‹  %d", collisonObject.status.level);//ƒŒƒxƒ‹”’l
-		DrawFormatString(450, 355, Cr[1] = GetColor(255, 255, 255), "ƒŒƒA“x  %d", collisonObject.status.rearity);//ƒŒƒxƒ‹”’l	
-		DrawFormatString(450, 370, Cr[1] = GetColor(255, 255, 255), "E  %d", collisonObject.status.Class);//ƒŒƒxƒ‹”’l
-		DrawFormatString(450, 385, Cr[1] = GetColor(255, 255, 255), "‹”F”ÍˆÍ  %d", collisonObject.status.range);//ƒŒƒxƒ‹”’l
-		DrawFormatString(450, 400, Cr[1] = GetColor(255, 255, 255), "‰B‚Ø‚¢—¦  %d", collisonObject.status.hide);//ƒŒƒxƒ‹”’l
-		DrawFormatString(450, 415, Cr[1] = GetColor(255, 255, 255), "ˆÚ“®ƒ}ƒX  %d", collisonObject.status.MS);//ƒŒƒxƒ‹”’l
-		DrawFormatString(450, 460, Cr[1] = GetColor(255, 255, 255), "ƒRƒXƒg  %d", collisonObject.status.cost);//ƒŒƒxƒ‹”’l
+		DrawFormatString(450, 355, Cr[1] = GetColor(255, 255, 255), "ƒŒƒA“x  %d", collisonObject.status.rearity);//ƒŒƒA”’l	
+		DrawFormatString(450, 370, Cr[1] = GetColor(255, 255, 255), "E  %d", collisonObject.status.Class);//ƒNƒ‰ƒX
+		DrawFormatString(450, 385, Cr[1] = GetColor(255, 255, 255), "‹”F”ÍˆÍ  %d", collisonObject.status.range);//‹”F”ÍˆÍ
+		DrawFormatString(450, 400, Cr[1] = GetColor(255, 255, 255), "‰B‚Ø‚¢—¦  %d", collisonObject.status.hide);//‰B•Á—¦
+		DrawFormatString(450, 415, Cr[1] = GetColor(255, 255, 255), "ˆÚ“®ƒ}ƒX  %d", collisonObject.status.MS);//Å‘åˆÚ“®ƒ}ƒX
+		DrawFormatString(450, 460, Cr[1] = GetColor(255, 255, 255), "ƒRƒXƒg  %d", collisonObject.status.cost);//ƒRƒXƒg
 
 		SetFontSize(40);
-		DrawFormatString(560, 400, Cr[1] = GetColor(255, 255, 255),  "%d", collisonObject.status.nowMS);//ƒŒƒxƒ‹”’l
+		DrawFormatString(560, 400, Cr[1] = GetColor(255, 255, 255),  "%d", collisonObject.status.nowMS);//c‚è‚ÌˆÚ“®
 
 		SetFontSize(20);
 

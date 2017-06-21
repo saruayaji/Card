@@ -291,3 +291,35 @@ void initMyCharaMenu() {
 	player.mycharaFocus.selectIndex = 0;
 }
 
+
+void initGetMyCharaMoveData() {
+	myChara[player.collisonObjectkind].data.initPosX = myChara[player.collisonObjectkind].data.x;
+	myChara[player.collisonObjectkind].data.initPosY = myChara[player.collisonObjectkind].data.y;
+	myChara[player.collisonObjectkind].data.initmuki = myChara[player.collisonObjectkind].data.muki;
+	myChara[player.collisonObjectkind].status.initMS = myChara[player.collisonObjectkind].status.nowMS;
+	player.data.initPosX = player.data.x;
+	player.data.initPosY = player.data.y;
+
+
+}
+
+void initSetMyCharaMoveData() {
+	myChara[player.collisonObjectkind].data.x = myChara[player.collisonObjectkind].data.initPosX;
+	myChara[player.collisonObjectkind].data.y = myChara[player.collisonObjectkind].data.initPosY;
+	myChara[player.collisonObjectkind].data.nextPosX = myChara[player.collisonObjectkind].data.initPosX;
+	myChara[player.collisonObjectkind].data.nextPosY = myChara[player.collisonObjectkind].data.initPosY;
+
+	myChara[player.collisonObjectkind].data.muki = myChara[player.collisonObjectkind].data.initmuki;
+	myChara[player.collisonObjectkind].status.nowMS = myChara[player.collisonObjectkind].status.initMS;
+	player.data.x = player.data.initPosX;
+	player.data.y = player.data.initPosY;
+	//動的に残り移動可能マスを変化
+	collisonObject.status.nowMS = myChara[player.collisonObjectkind].status.nowMS;
+}
+
+void initAllMyCharaNowMS() {
+	for (int i = 0; i < MYCHARA_NUM; i++) {
+		myChara[i].status.nowMS = myChara[i].status.MS;
+	}
+}
+

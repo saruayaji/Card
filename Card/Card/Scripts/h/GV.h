@@ -141,6 +141,7 @@ struct Status {
 	int rearity;//レア度
 	int MS;		//MAX移動マス
 	int nowMS;	//あと何歩移動できるか
+	int initMS;
 	int canItem;
 	int nowCanItem;
 	int HP;
@@ -287,6 +288,10 @@ extern void initMAP();					//マップの初期化
 extern void initTitleMenu();			//タイトルメニューのselectの初期化
 extern void initOpenGameMenu();		//ゲームメニューのselectの初期化
 extern void initMyCharaMenu();		//キャラメニューのselectの初期化
+extern void initGetMyCharaMoveData();
+extern void initSetMyCharaMoveData();
+extern void initAllMyCharaNowMS();
+
 //■入力
 extern void input();					//入力処理
 
@@ -425,7 +430,9 @@ extern Charactor collisonObject;
 					extern void initTitleMenu();			//タイトルメニューのselectの初期化
 					extern void initOpenGameMenu();		//ゲームメニューのselectの初期化
 					extern void initMyCharaMenu();		//キャラメニューのselectの初期化
-
+					extern void initGetMyCharaMoveData();
+					extern void initSetMyCharaMoveData();
+					extern void initAllMyCharaNowMS();
 //■入力
 					extern void input();					//入力処理
 //■更新

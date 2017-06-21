@@ -14,6 +14,9 @@ void updateMyChara() {
 		//player.collisonFlag = FALSE;
 		//searchObject();
 
+		//動的に残り移動可能マスを変化
+		collisonObject.status.nowMS = myChara[player.collisonObjectkind].status.nowMS;
+
 		//移動できるかを判定。
 		if (isAbleToGo(player.collisonObjectkind, myChara[player.collisonObjectkind].data.x, myChara[player.collisonObjectkind].data.y, myChara[player.collisonObjectkind].data.muki) != 1)myChara[player.collisonObjectkind].data.walking_flag = 0;//移動できないなら移動フラグを0にする
 		
@@ -24,8 +27,7 @@ void updateMyChara() {
 				gameState = noState;
 				player.mycharaFocus.state = noState;
 				//初期座標を設定
-				myChara[player.collisonObjectkind].data.initPosX = myChara[player.collisonObjectkind].data.x;
-				myChara[player.collisonObjectkind].data.initPosY = myChara[player.collisonObjectkind].data.y;
+				initGetMyCharaMoveData();
 			}
 		}
 
@@ -34,7 +36,17 @@ void updateMyChara() {
 	//実際にプレイヤーが移動する
 	if (myChara[player.collisonObjectkind].data.walking_flag == 1 && myChara[player.collisonObjectkind].data.attack_flag == 0) {//歩行フラグがONかつ攻撃フラグがＯＦＦなら
 		walkingUpdateMyChara(myChara[player.collisonObjectkind].data.muki);//移動変化関数（向きに応じて座標を変化させる関数）
+		
+
+		//プレイヤーが移動し終えたときの処理
+		if (myChara[player.collisonObjectkind].data.x == myChara[player.collisonObjectkind].data.nextPosX &&myChara[player.collisonObjectkind].data.y == myChara[player.collisonObjectkind].data.nextPosY) {
+			myChara[player.collisonObjectkind].status.nowMS--;//移動可能マスを減らす
+
+		}
+	
 	}
+
+
 }
 
 
@@ -52,29 +64,37 @@ void myCharaKeyPushManage() {
 
 	//移動の管理
 	//十字移動　　　「↓」「←」「→」「↑」の順
-	if (keyBuffer[KEY_INPUT_DOWN] == 1 && keyBuffer[KEY_INPUT_LSHIFT] == 0 && keyBuffer[KEY_INPUT_V] == 0)myChara[player.collisonObjectkind].data.muki = 0;
-	else if (keyBuffer[KEY_INPUT_LEFT] == 1 && keyBuffer[KEY_INPUT_LSHIFT] == 0 && keyBuffer[KEY_INPUT_V] == 0)myChara[player.collisonObjectkind].data.muki = 1;  //左ボタンが押されたら左向きフラグを立てる
-	else if (keyBuffer[KEY_INPUT_RIGHT] == 1 && keyBuffer[KEY_INPUT_LSHIFT] == 0 && keyBuffer[KEY_INPUT_V] == 0)myChara[player.collisonObjectkind].data.muki = 2;//右ボタンが押されたら右向きフラグを立てる
-	else if (keyBuffer[KEY_INPUT_UP] == 1 && keyBuffer[KEY_INPUT_LSHIFT] == 0 && keyBuffer[KEY_INPUT_V] == 0)myChara[player.collisonObjectkind].data.muki = 3;//上ボタンが押されたら上向きフラグを立てる
-																																  //斜め移動		「右上」「右下」「左上」「左下」の順
-	else if (keyBuffer[KEY_INPUT_UP] == 1 && keyBuffer[KEY_INPUT_RIGHT] == 1 && keyBuffer[KEY_INPUT_LSHIFT] == 1 && keyBuffer[KEY_INPUT_V] == 0)myChara[player.collisonObjectkind].data.muki = 4;//右上ボタンが押されたら上向きフラグを立てる
-	else if (keyBuffer[KEY_INPUT_DOWN] == 1 && keyBuffer[KEY_INPUT_RIGHT] == 1 && keyBuffer[KEY_INPUT_LSHIFT] == 1 && keyBuffer[KEY_INPUT_V] == 0)myChara[player.collisonObjectkind].data.muki = 5;//右下ボタンが押されたら上向きフラグを立てる
-	else if (keyBuffer[KEY_INPUT_UP] == 1 && keyBuffer[KEY_INPUT_LEFT] == 1 && keyBuffer[KEY_INPUT_LSHIFT] == 1 && keyBuffer[KEY_INPUT_V] == 0)myChara[player.collisonObjectkind].data.muki = 6;//左上ボタンが押されたら上向きフラグを立てる
-	else if (keyBuffer[KEY_INPUT_DOWN] == 1 && keyBuffer[KEY_INPUT_LEFT] == 1 && keyBuffer[KEY_INPUT_LSHIFT] == 1 && keyBuffer[KEY_INPUT_V] == 0)myChara[player.collisonObjectkind].data.muki = 7;//左下ボタンが押されたら上向きフラグを立てる
-																																									  //その場向き転換の管理
+	if (myChara[player.collisonObjectkind].status.nowMS != 0 && keyBuffer[KEY_INPUT_V] == 0) {	//移動可能マスが0でない　＆＆　Ｖキーが押されてなければ
+		if (keyBuffer[KEY_INPUT_DOWN] == 1 && keyBuffer[KEY_INPUT_LSHIFT] == 0   )myChara[player.collisonObjectkind].data.muki = 0;
+		else if (keyBuffer[KEY_INPUT_LEFT] == 1 && keyBuffer[KEY_INPUT_LSHIFT] == 0 )myChara[player.collisonObjectkind].data.muki = 1;  //左ボタンが押されたら左向きフラグを立てる
+		else if (keyBuffer[KEY_INPUT_RIGHT] == 1 && keyBuffer[KEY_INPUT_LSHIFT] == 0)myChara[player.collisonObjectkind].data.muki = 2;//右ボタンが押されたら右向きフラグを立てる
+		else if (keyBuffer[KEY_INPUT_UP] == 1 && keyBuffer[KEY_INPUT_LSHIFT] == 0)myChara[player.collisonObjectkind].data.muki = 3;//上ボタンが押されたら上向きフラグを立てる
+																																	  //斜め移動		「右上」「右下」「左上」「左下」の順
+		else if (keyBuffer[KEY_INPUT_UP] == 1 && keyBuffer[KEY_INPUT_RIGHT] == 1 && keyBuffer[KEY_INPUT_LSHIFT] == 1 )myChara[player.collisonObjectkind].data.muki = 4;//右上ボタンが押されたら上向きフラグを立てる
+		else if (keyBuffer[KEY_INPUT_DOWN] == 1 && keyBuffer[KEY_INPUT_RIGHT] == 1 && keyBuffer[KEY_INPUT_LSHIFT] == 1)myChara[player.collisonObjectkind].data.muki = 5;//右下ボタンが押されたら上向きフラグを立てる
+		else if (keyBuffer[KEY_INPUT_UP] == 1 && keyBuffer[KEY_INPUT_LEFT] == 1 && keyBuffer[KEY_INPUT_LSHIFT] == 1 )myChara[player.collisonObjectkind].data.muki = 6;//左上ボタンが押されたら上向きフラグを立てる
+		else if (keyBuffer[KEY_INPUT_DOWN] == 1 && keyBuffer[KEY_INPUT_LEFT] == 1 && keyBuffer[KEY_INPUT_LSHIFT] == 1)myChara[player.collisonObjectkind].data.muki = 7;//左下ボタンが押されたら上向きフラグを立てる
+		else {
+			myChara[player.collisonObjectkind].data.walking_flag = 0, myChara[player.collisonObjectkind].data.nextWalking_flag = 0;//何のボタンも押されてなかったら歩行フラグOFF
+			
+		}
+
+	}else 	myChara[player.collisonObjectkind].data.walking_flag = 0, myChara[player.collisonObjectkind].data.nextWalking_flag = 0;//何のボタンも押されてなかったら歩行フラグOFF
+
+	//その場向き転換の管理
 	//十字向き変換　　　「↓」「←」「→」「↑」の順
-	else if (keyBuffer[KEY_INPUT_V] == 1 && keyBuffer[KEY_INPUT_DOWN] == 1 && keyBuffer[KEY_INPUT_LSHIFT] == 0) myChara[player.collisonObjectkind].data.muki = 0, myChara[player.collisonObjectkind].data.walking_flag = 0, myChara[player.collisonObjectkind].data.nextWalking_flag = 0;//下に向く
-	else if (keyBuffer[KEY_INPUT_V] == 1 && keyBuffer[KEY_INPUT_LEFT] == 1 && keyBuffer[KEY_INPUT_LSHIFT] == 0) myChara[player.collisonObjectkind].data.muki = 1, myChara[player.collisonObjectkind].data.walking_flag = 0, myChara[player.collisonObjectkind].data.nextWalking_flag = 0;//左に向く
-	else if (keyBuffer[KEY_INPUT_V] == 1 && keyBuffer[KEY_INPUT_RIGHT] == 1 && keyBuffer[KEY_INPUT_LSHIFT] == 0) myChara[player.collisonObjectkind].data.muki = 2, myChara[player.collisonObjectkind].data.walking_flag = 0, myChara[player.collisonObjectkind].data.nextWalking_flag = 0;//右に向く
-	else if (keyBuffer[KEY_INPUT_V] == 1 && keyBuffer[KEY_INPUT_UP] == 1 && keyBuffer[KEY_INPUT_LSHIFT] == 0) myChara[player.collisonObjectkind].data.muki = 3, myChara[player.collisonObjectkind].data.walking_flag = 0, myChara[player.collisonObjectkind].data.nextWalking_flag = 0;//上に向く
-																																																   //斜め向き転換		「右上」「右下」「左上」「左下」の順
-	else if (keyBuffer[KEY_INPUT_V] == 1 && keyBuffer[KEY_INPUT_UP] == 1 && keyBuffer[KEY_INPUT_RIGHT] == 1 && keyBuffer[KEY_INPUT_LSHIFT] == 1) myChara[player.collisonObjectkind].data.muki = 4, myChara[player.collisonObjectkind].data.walking_flag = 0, myChara[player.collisonObjectkind].data.nextWalking_flag = 0;//右上に向く
-	else if (keyBuffer[KEY_INPUT_V] == 1 && keyBuffer[KEY_INPUT_DOWN] == 1 && keyBuffer[KEY_INPUT_RIGHT] == 1 && keyBuffer[KEY_INPUT_LSHIFT] == 1) myChara[player.collisonObjectkind].data.muki = 5, myChara[player.collisonObjectkind].data.walking_flag = 0, myChara[player.collisonObjectkind].data.nextWalking_flag = 0;//右下に向く
-	else if (keyBuffer[KEY_INPUT_V] == 1 && keyBuffer[KEY_INPUT_UP] == 1 && keyBuffer[KEY_INPUT_LEFT] == 1 && keyBuffer[KEY_INPUT_LSHIFT] == 1) myChara[player.collisonObjectkind].data.muki = 6, myChara[player.collisonObjectkind].data.walking_flag = 0, myChara[player.collisonObjectkind].data.nextWalking_flag = 0;//左上に向く
-	else if (keyBuffer[KEY_INPUT_V] == 1 && keyBuffer[KEY_INPUT_DOWN] == 1 && keyBuffer[KEY_INPUT_LEFT] == 1 && keyBuffer[KEY_INPUT_LSHIFT] == 1) myChara[player.collisonObjectkind].data.muki = 7, myChara[player.collisonObjectkind].data.walking_flag = 0, myChara[player.collisonObjectkind].data.nextWalking_flag = 0;//左下に向く
-	else {
-		myChara[player.collisonObjectkind].data.walking_flag = 0;//何のボタンも押されてなかったら歩行フラグOFF
-		myChara[player.collisonObjectkind].data.nextWalking_flag = 0;
+	if (keyBuffer[KEY_INPUT_V] == 1) {
+		if (keyBuffer[KEY_INPUT_DOWN] == 1 && keyBuffer[KEY_INPUT_LSHIFT] == 0) myChara[player.collisonObjectkind].data.muki = 0;//下に向く
+		else if (keyBuffer[KEY_INPUT_LEFT] == 1 && keyBuffer[KEY_INPUT_LSHIFT] == 0) myChara[player.collisonObjectkind].data.muki = 1;//左に向く
+		else if (keyBuffer[KEY_INPUT_RIGHT] == 1 && keyBuffer[KEY_INPUT_LSHIFT] == 0) myChara[player.collisonObjectkind].data.muki = 2;//右に向く
+		else if (keyBuffer[KEY_INPUT_UP] == 1 && keyBuffer[KEY_INPUT_LSHIFT] == 0) myChara[player.collisonObjectkind].data.muki = 3;//上に向く
+																																	//斜め向き転換		「右上」「右下」「左上」「左下」の順
+		else if (keyBuffer[KEY_INPUT_UP] == 1 && keyBuffer[KEY_INPUT_RIGHT] == 1 && keyBuffer[KEY_INPUT_LSHIFT] == 1) myChara[player.collisonObjectkind].data.muki = 4;//右上に向く
+		else if (keyBuffer[KEY_INPUT_DOWN] == 1 && keyBuffer[KEY_INPUT_RIGHT] == 1 && keyBuffer[KEY_INPUT_LSHIFT] == 1) myChara[player.collisonObjectkind].data.muki = 5;//右下に向く
+		else if (keyBuffer[KEY_INPUT_UP] == 1 && keyBuffer[KEY_INPUT_LEFT] == 1 && keyBuffer[KEY_INPUT_LSHIFT] == 1) myChara[player.collisonObjectkind].data.muki = 6;//左上に向く
+		else if (keyBuffer[KEY_INPUT_DOWN] == 1 && keyBuffer[KEY_INPUT_LEFT] == 1 && keyBuffer[KEY_INPUT_LSHIFT] == 1) myChara[player.collisonObjectkind].data.muki = 7;//左下に向く
+
+		myChara[player.collisonObjectkind].data.walking_flag = 0, myChara[player.collisonObjectkind].data.nextWalking_flag = 0;
 	}
 }
 void walkingUpdateMyChara(int muki) {
