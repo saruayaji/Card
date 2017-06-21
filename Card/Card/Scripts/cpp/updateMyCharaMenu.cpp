@@ -15,7 +15,6 @@ void  updateMyCharaMenu() {
 
 */
 
-
 		switch (player.mycharaFocus.state)
 		{
 		case noState://-----------------------ƒƒjƒ…[‚ğŠJ‚­‚©‚Ç‚¤‚©
