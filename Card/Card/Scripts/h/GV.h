@@ -128,12 +128,6 @@ struct Message {
 
 };
 
-struct GameMenu {
-	boolean gameMenuFocusflag;
-	int state;
-	int selectIndex;
-};
-
 struct MycharaFocus {
 	boolean mycharaFocusflag;
 	int state;
@@ -190,7 +184,6 @@ struct Origin {//‚·‚×‚Ä‚ÌŒ³
 	int deadOrAlive;
 	int collisonObjectkind;
 	boolean collisonFlag;
-	GameMenu gameMenu;
 	MycharaFocus mycharaFocus;
 };
 
